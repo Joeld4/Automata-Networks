@@ -2,9 +2,11 @@
 #include <stdlib.h>
 
 
- int n1, n2, n3, l1, l2, l3, p;
+    int m, n1, n2, n3, l1, l2, l3, p;
 
-   int *tab;
+    int *tab;
+    int **b;
+    int v[m][6];
 
 int main()
 {
@@ -13,11 +15,11 @@ int main()
 }
 
 //**********METHODE POUR LA MATRICE B*****************
+
 void b_matrix(int m, int *tab){
 
     //Instantiation de la matrice B
     int i,j;
-    int **b;
     m = (sizeof(tab) / sizeof(int));
     b = (int**)malloc(m * sizeof(int));
     for(i = 0; i < m; i++){
@@ -34,9 +36,9 @@ void b_matrix(int m, int *tab){
     {
         for(j = 0; j < m; j++)
         {
-            if(i = 0)
+            if(i == 0)
             {
-                if((j=1) || (j=n1+1) || (j=n1+n2+1) || (j=l1+1) || (j=n1+l2+1) || (j=n1+n2+l3+1))
+                if((j==1) || (j==n1+1) || (j==n1+n2+1) || (j==l1+1) || (j==n1+l2+1) || (j==n1+n2+l3+1))
                 {
                     b[i][j] = 1;
                     b[j][i] = 1;
@@ -53,5 +55,48 @@ void b_matrix(int m, int *tab){
     }
 
 }
+
+
+//*************METHODE POUR LA MATRICE V****************
+
+void v_matrix(int **b)
+{
+
+    //Instatiation de la matrice V
+    int i, j, k;
+    for(i = 0; i < m-1; i++)
+    {
+        for(j = 0; j < 6; j++)
+        {
+            v[i][j] = -1;
+        }
+    }
+
+
+    //Remplissage de la matrice V
+    for(i = 0; i < m-1; i++)
+    {
+        k = 0;
+        for(j = 0; j < 6; j++)
+        {
+            if(b[i][j] == 1)
+            {
+                v[i][k] = j;
+                k++;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
